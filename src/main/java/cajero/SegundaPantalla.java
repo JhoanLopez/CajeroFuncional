@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cajero;
 
 /**
- *
+ * @date 15 dic. 2021
  * @author Jhoan López
+ * @email Jhoanlopezclase@gmail.com
  */
+
 public class SegundaPantalla extends javax.swing.JFrame {
 
     /**
