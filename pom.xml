@@ -16,6 +16,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.27</version>
         </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>Componentes</artifactId>
+            <version>UTF-16</version>
+        </dependency>
     </dependencies>
     <name>Cajero</name>
 </project>
