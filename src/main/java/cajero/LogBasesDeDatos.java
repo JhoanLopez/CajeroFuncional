@@ -10,18 +10,17 @@ import java.io.*;
  * @email Jhoanlopezclase@gmail.com
  */
 
-public class Cajero {
-    public static void main (String [] args) {
-     
+public class LogBasesDeDatos {
+    public static Connection getConectar() {
         Properties properties = new Properties();
-        
+        Connection conexion = null;
         try {
             properties.load(new FileInputStream(new File("properties.properties")));
             String url = properties.get("url").toString();
             String user = properties.get("user").toString();
             String pass = properties.get("pass").toString();
-            
             try (var con = DriverManager.getConnection(url, user, pass)){
+                conexion = (Connection) DriverManager.getConnection (url,user,pass);
                 String guion = "--------------------";
                 System.out.println(guion + " CONECTADO CON LA BASE DE DATOS " + guion);
             } catch (SQLException ex) {
@@ -35,9 +34,6 @@ public class Cajero {
             System.out.println("ERROR: ");
             System.out.println(ex);
         }
-        
-        
-        
-        
+        return conexion;
     }
 }
