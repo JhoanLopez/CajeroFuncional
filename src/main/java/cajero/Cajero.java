@@ -16,7 +16,7 @@ public class Cajero {
         Properties properties = new Properties();
         
         try {
-            properties.load(new FileInputStream(new File("newproperties.properties")));
+            properties.load(new FileInputStream(new File("properties.properties")));
             String url = properties.get("url").toString();
             String user = properties.get("user").toString();
             String pass = properties.get("pass").toString();
