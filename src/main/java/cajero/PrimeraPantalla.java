@@ -1,8 +1,6 @@
 package cajero;
 
 import java.awt.Image;
-import java.text.SimpleDateFormat;
-import java.util.*;
 import javax.swing.*;
 
 /**
@@ -15,24 +13,22 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
    
     public PrimeraPantalla() {
         initComponents();
-        jl_fecha.setText(fechaActual());
+        jl_fecha.setText(fechaHora.fechaActual());
         ImageIcon imagLogo = new ImageIcon ("src/imagenes/Logo_olimpus.png");
         Icon icono = new ImageIcon (imagLogo.getImage().getScaledInstance(jl_logo.getWidth(), jl_logo.getHeight(), Image.SCALE_DEFAULT));
         jl_logo.setIcon(icono); 
         hilo = new Thread(this);
-        hilo.start();
+        hilo.start(); 
     }
 
     SegundaPantalla segPantalla = new SegundaPantalla();
+    FechaHora fechaHora = new FechaHora();
     Tarjeta tarjeta = new Tarjeta();
        
     public static int cont = 0;
-    public static String hor, min, seg;
     public static Thread hilo;
     
-    
-    
-    
+ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -363,7 +359,7 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jp_numPinFocusGained
 
     private void jt_numCvsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_numCvsKeyTyped
-        tarjeta.setSoloNum(evt, jl_infoNumPin, jt_numCvs, 4);
+        tarjeta.setSoloNum(evt, jl_infoNumPin, jt_numCvs, 3);
     }//GEN-LAST:event_jt_numCvsKeyTyped
 
     private void but_identificateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_identificateActionPerformed
@@ -381,45 +377,20 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
     private void but_identificateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_but_identificateFocusLost
         jl_infoGeneral.setText("");
     }//GEN-LAST:event_but_identificateFocusLost
-     
-    public static String fechaActual(){
-        Date fecha = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("DD/MM/YYYY");
-        return formatoFecha.format(fecha);
-    }
-    
-    public void horaActual () {
-        Calendar calendario = new GregorianCalendar();
-        Date horaAct = new Date();
-        calendario.setTime(horaAct);
-        hor = 
-            calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + 
-            calendario.get(Calendar.HOUR_OF_DAY):"0" +
-            calendario.get(Calendar.HOUR_OF_DAY)
-        ;
-        min = 
-            calendario.get(Calendar.MINUTE) > 9 ? "" +
-            calendario.get(Calendar.MINUTE) : "0" +
-            calendario.get(Calendar.MINUTE)
-        ;
-        seg = 
-            calendario.get(Calendar.SECOND) > 9 ? "" +
-            calendario.get(Calendar.SECOND) : "0" +
-            calendario.get(Calendar.SECOND)
-        ;
-    }
-    
+
+    @Override
     public void run () {
         Thread current = Thread.currentThread();
         while (current ==  hilo) {
-            horaActual();
-            jl_hora.setText(hor + ":" + min + ":" + seg);       
+            fechaHora.horaActual();
+            jl_hora.setText(fechaHora.hor + ":" + fechaHora.min + ":" + fechaHora.seg);       
         }
     }
     
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -446,6 +417,7 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new PrimeraPantalla().setVisible(true);
             }
@@ -462,7 +434,7 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jl_cerrar;
     private javax.swing.JLabel jl_fecha;
     private javax.swing.JLabel jl_fechaCaducidad;
-    private javax.swing.JLabel jl_hora;
+    public javax.swing.JLabel jl_hora;
     private javax.swing.JLabel jl_infoGeneral;
     private javax.swing.JLabel jl_infoNumPin;
     private javax.swing.JLabel jl_infoNumPin1;
@@ -475,6 +447,4 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField jt_numCvs;
     private javax.swing.JTextField jt_numTarjeta;
     // End of variables declaration//GEN-END:variables
-
-   
 }
