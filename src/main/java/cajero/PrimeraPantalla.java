@@ -1,6 +1,8 @@
 package cajero;
 
 import java.awt.Image;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import javax.swing.*;
 
 /**
@@ -9,21 +11,26 @@ import javax.swing.*;
  * @email Jhoanlopezclase@gmail.com
  */
 
-public class PrimeraPantalla extends javax.swing.JFrame {
-
+public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
    
     public PrimeraPantalla() {
         initComponents();
+        jl_fecha.setText(fechaActual());
         ImageIcon imagLogo = new ImageIcon ("src/imagenes/Logo_olimpus.png");
         Icon icono = new ImageIcon (imagLogo.getImage().getScaledInstance(jl_logo.getWidth(), jl_logo.getHeight(), Image.SCALE_DEFAULT));
-        jl_logo.setIcon(icono);  
+        jl_logo.setIcon(icono); 
+        hilo = new Thread(this);
+        hilo.start();
     }
 
     SegundaPantalla segPantalla = new SegundaPantalla();
     Tarjeta tarjeta = new Tarjeta();
+       
+    public static int cont = 0;
+    public static String hor, min, seg;
+    public static Thread hilo;
     
     
-    int cont = 0;
     
     
     @SuppressWarnings("unchecked")
@@ -43,23 +50,37 @@ public class PrimeraPantalla extends javax.swing.JFrame {
         cb_meses = new javax.swing.JComboBox<>();
         cb_anos = new javax.swing.JComboBox<>();
         jl_infoNumPin = new javax.swing.JLabel();
-        jl_infoNumCvs = new javax.swing.JLabel();
         jl_infoNumTarjeta = new javax.swing.JLabel();
         jl_infoNumPin1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jl_minimizar = new javax.swing.JLabel();
+        jl_cerrar = new javax.swing.JLabel();
+        jl_infoGeneral = new javax.swing.JLabel();
+        jl_fecha = new javax.swing.JLabel();
+        jl_hora = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(450, 700));
+        setMinimumSize(new java.awt.Dimension(450, 650));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(450, 650));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(450, 700));
+        jPanel1.setMinimumSize(new java.awt.Dimension(450, 650));
+        jPanel1.setPreferredSize(new java.awt.Dimension(450, 650));
 
         jl_logo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jl_logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        but_identificate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        but_identificate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         but_identificate.setText("IDENTIFÍCATE");
+        but_identificate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                but_identificateFocusLost(evt);
+            }
+        });
         but_identificate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 but_identificateActionPerformed(evt);
@@ -91,7 +112,7 @@ public class PrimeraPantalla extends javax.swing.JFrame {
 
         jl_numCvs.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jl_numCvs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jl_numCvs.setText("Número CVS");
+        jl_numCvs.setText("CVS");
         jl_numCvs.setToolTipText("");
 
         jp_numPin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -134,8 +155,6 @@ public class PrimeraPantalla extends javax.swing.JFrame {
 
         jl_infoNumPin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jl_infoNumCvs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         jl_infoNumTarjeta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_infoNumTarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -145,6 +164,65 @@ public class PrimeraPantalla extends javax.swing.JFrame {
 
         jl_infoNumPin1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jl_minimizar.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jl_minimizar.setForeground(new java.awt.Color(153, 153, 153));
+        jl_minimizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_minimizar.setText("-");
+        jl_minimizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jl_minimizar.setMaximumSize(new java.awt.Dimension(25, 25));
+        jl_minimizar.setMinimumSize(new java.awt.Dimension(25, 25));
+        jl_minimizar.setPreferredSize(new java.awt.Dimension(25, 25));
+        jl_minimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_minimizarMouseClicked(evt);
+            }
+        });
+
+        jl_cerrar.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jl_cerrar.setForeground(new java.awt.Color(153, 153, 153));
+        jl_cerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_cerrar.setText("X");
+        jl_cerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jl_cerrar.setMaximumSize(new java.awt.Dimension(25, 25));
+        jl_cerrar.setMinimumSize(new java.awt.Dimension(25, 25));
+        jl_cerrar.setPreferredSize(new java.awt.Dimension(25, 25));
+        jl_cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_cerrarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jl_minimizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jl_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jl_minimizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jl_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jl_infoGeneral.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_infoGeneral.setForeground(new java.awt.Color(255, 0, 0));
+        jl_infoGeneral.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jl_fecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_fecha.setForeground(new java.awt.Color(204, 204, 204));
+        jl_fecha.setText("DD/MM/YYYY");
+
+        jl_hora.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_hora.setForeground(new java.awt.Color(204, 204, 204));
+        jl_hora.setText("00:00:00");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -152,103 +230,126 @@ public class PrimeraPantalla extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(jp_numPin, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jt_numCvs, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(380, 380, 380)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addComponent(jl_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jl_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jt_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jl_fechaCaducidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(but_identificate, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jl_infoNumPin, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jl_infoNumCvs, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jl_numCvs, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jl_infoNumTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(cb_meses, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cb_anos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jl_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jl_infoNumPin1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(424, 424, 424))
+                        .addComponent(jt_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jl_infoNumTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jl_fechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(but_identificate, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jl_infoNumPin, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jl_numCvs, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jt_numCvs, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cb_meses, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cb_anos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jl_infoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jp_numPin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                                .addComponent(jl_infoNumPin1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jl_fecha)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jl_hora))
+                            .addComponent(jl_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jl_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jl_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jl_fecha)
+                    .addComponent(jl_hora))
+                .addGap(56, 56, 56)
                 .addComponent(jl_numTarjeta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jt_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jl_infoNumTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jl_fechaCaducidad, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                .addGap(4, 4, 4)
+                .addGap(18, 18, 18)
+                .addComponent(jl_fechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_anos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_meses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_meses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_anos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jl_infoNumPin1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jl_numCvs)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jl_numCvs)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jt_numCvs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jt_numCvs, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jp_numPin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jl_infoNumCvs, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jLabel4)
+                .addComponent(jl_infoNumPin, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(but_identificate, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jp_numPin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jl_infoNumPin, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(but_identificate, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-                .addGap(40, 40, 40))
+                .addComponent(jl_infoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-        );
+        jl_infoGeneral.getAccessibleContext().setAccessibleName("");
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void but_identificateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_identificateActionPerformed
-        if (tarjeta.getIdentificarCliente(jt_numTarjeta.getText(), jt_numCvs.getText(), 
-            jp_numPin.getText(), "") == "Usuario encontrado"){
-            
-            segPantalla.setVisible(true);
-            segPantalla.jl_nombre.setText(tarjeta.buscarNombre(jt_numTarjeta.getText()));
-            this.dispose();
-        }
-    }//GEN-LAST:event_but_identificateActionPerformed
+    private void jl_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_cerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jl_cerrarMouseClicked
+
+    private void jl_minimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_minimizarMouseClicked
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_jl_minimizarMouseClicked
+
+    private void jl_infoNumTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jl_infoNumTarjetaKeyTyped
+
+    }//GEN-LAST:event_jl_infoNumTarjetaKeyTyped
+
+    private void jt_numTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_numTarjetaKeyTyped
+        tarjeta.setValidarNumTarjeta(evt, jl_infoNumTarjeta, jt_numTarjeta, 25);
+    }//GEN-LAST:event_jt_numTarjetaKeyTyped
+
+    private void jt_numTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_numTarjetaActionPerformed
+
+    }//GEN-LAST:event_jt_numTarjetaActionPerformed
 
     private void jp_numPinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jp_numPinKeyTyped
         tarjeta.setSoloNum(evt, jl_infoNumPin, jp_numPin, 4);
     }//GEN-LAST:event_jp_numPinKeyTyped
-
-    private void jp_numPinFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jp_numPinFocusGained
-        
-    }//GEN-LAST:event_jp_numPinFocusGained
 
     private void jp_numPinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp_numPinMouseClicked
         if (cont == 0) {
@@ -257,22 +358,64 @@ public class PrimeraPantalla extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jp_numPinMouseClicked
 
+    private void jp_numPinFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jp_numPinFocusGained
+
+    }//GEN-LAST:event_jp_numPinFocusGained
+
     private void jt_numCvsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_numCvsKeyTyped
-        tarjeta.setSoloNum(evt, jl_infoNumCvs, jt_numCvs, 4);
+        tarjeta.setSoloNum(evt, jl_infoNumPin, jt_numCvs, 4);
     }//GEN-LAST:event_jt_numCvsKeyTyped
 
-    private void jl_infoNumTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jl_infoNumTarjetaKeyTyped
-        
-    }//GEN-LAST:event_jl_infoNumTarjetaKeyTyped
+    private void but_identificateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_identificateActionPerformed
+        if (tarjeta.getIdentificarCliente(jt_numTarjeta.getText(), jt_numCvs.getText(),
+        jp_numPin.getText(), "") == "Usuario encontrado"){
 
-    private void jt_numTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_numTarjetaKeyTyped
-        tarjeta.setValidarNumTarjeta(evt, jl_infoNumTarjeta, jt_numTarjeta, 25);
-    }//GEN-LAST:event_jt_numTarjetaKeyTyped
+            segPantalla.setVisible(true);
+            segPantalla.jl_nombre.setText(tarjeta.buscarNombre(jt_numTarjeta.getText()));
+            this.dispose();
+        } else {
+            jl_infoGeneral.setText("Datos incorrectos, vuelve a intentarlo");
+        }
+    }//GEN-LAST:event_but_identificateActionPerformed
 
-    private void jt_numTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_numTarjetaActionPerformed
-        
-    }//GEN-LAST:event_jt_numTarjetaActionPerformed
-
+    private void but_identificateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_but_identificateFocusLost
+        jl_infoGeneral.setText("");
+    }//GEN-LAST:event_but_identificateFocusLost
+     
+    public static String fechaActual(){
+        Date fecha = new Date();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("DD/MM/YYYY");
+        return formatoFecha.format(fecha);
+    }
+    
+    public void horaActual () {
+        Calendar calendario = new GregorianCalendar();
+        Date horaAct = new Date();
+        calendario.setTime(horaAct);
+        hor = 
+            calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + 
+            calendario.get(Calendar.HOUR_OF_DAY):"0" +
+            calendario.get(Calendar.HOUR_OF_DAY)
+        ;
+        min = 
+            calendario.get(Calendar.MINUTE) > 9 ? "" +
+            calendario.get(Calendar.MINUTE) : "0" +
+            calendario.get(Calendar.MINUTE)
+        ;
+        seg = 
+            calendario.get(Calendar.SECOND) > 9 ? "" +
+            calendario.get(Calendar.SECOND) : "0" +
+            calendario.get(Calendar.SECOND)
+        ;
+    }
+    
+    public void run () {
+        Thread current = Thread.currentThread();
+        while (current ==  hilo) {
+            horaActual();
+            jl_hora.setText(hor + ":" + min + ":" + seg);       
+        }
+    }
     
     /**
      * @param args the command line arguments
@@ -315,16 +458,23 @@ public class PrimeraPantalla extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_meses;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jl_cerrar;
+    private javax.swing.JLabel jl_fecha;
     private javax.swing.JLabel jl_fechaCaducidad;
-    private javax.swing.JLabel jl_infoNumCvs;
+    private javax.swing.JLabel jl_hora;
+    private javax.swing.JLabel jl_infoGeneral;
     private javax.swing.JLabel jl_infoNumPin;
     private javax.swing.JLabel jl_infoNumPin1;
     private javax.swing.JLabel jl_infoNumTarjeta;
     private javax.swing.JLabel jl_logo;
+    private javax.swing.JLabel jl_minimizar;
     private javax.swing.JLabel jl_numCvs;
     private javax.swing.JLabel jl_numTarjeta;
     private javax.swing.JPasswordField jp_numPin;
     private javax.swing.JTextField jt_numCvs;
     private javax.swing.JTextField jt_numTarjeta;
     // End of variables declaration//GEN-END:variables
+
+   
 }
