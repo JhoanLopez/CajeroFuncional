@@ -58,7 +58,7 @@ public class Tarjeta {
         
         try {
             conexion = LogBasesDeDatos.getConectar();
-            SegundaPantalla segPantalla = new SegundaPantalla();
+            BienvenidoUsuarioPantalla segPantalla = new BienvenidoUsuarioPantalla();
             String sentIdentCliente = 
             ("SELECT bloqueada FROM tarjeta WHERE numero = '" +
             numTarjeta + "' && cvs = '" + cvs + "' && pin = '" + pin +"'");

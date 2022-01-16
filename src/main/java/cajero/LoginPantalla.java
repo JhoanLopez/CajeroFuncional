@@ -9,9 +9,9 @@ import javax.swing.*;
  * @email Jhoanlopezclase@gmail.com
  */
 
-public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
+public class LoginPantalla extends javax.swing.JFrame implements Runnable {
    
-    public PrimeraPantalla() {
+    public LoginPantalla() {
         initComponents();
         jl_fecha.setText(fechaHora.fechaActual());
         ImageIcon imagLogo = new ImageIcon ("src/imagenes/Logo_olimpus.png");
@@ -21,7 +21,7 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
         hilo.start(); 
     }
 
-    SegundaPantalla segPantalla = new SegundaPantalla();
+    BienvenidoUsuarioPantalla usuarioPant = new BienvenidoUsuarioPantalla();
     FechaHora fechaHora = new FechaHora();
     Tarjeta tarjeta = new Tarjeta();
        
@@ -255,7 +255,7 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jl_hora))
                             .addComponent(jl_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,8 +336,8 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
         if (tarjeta.getIdentificarCliente(jt_numTarjeta.getText(), jt_numCvs.getText(),
         jp_numPin.getText(), "") == "Usuario encontrado"){
 
-            segPantalla.setVisible(true);
-            segPantalla.jl_nombre.setText(tarjeta.buscarNombre(jt_numTarjeta.getText()));
+            usuarioPant.setVisible(true);
+            usuarioPant.jl_nombre.setText(tarjeta.buscarNombre(jt_numTarjeta.getText()).toUpperCase());
             this.dispose();
         } else {
             jl_infoGeneral.setText("Datos incorrectos, vuelve a intentarlo");
@@ -375,21 +375,22 @@ public class PrimeraPantalla extends javax.swing.JFrame implements Runnable {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrimeraPantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrimeraPantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrimeraPantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrimeraPantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginPantalla.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new PrimeraPantalla().setVisible(true);
+                new LoginPantalla().setVisible(true);
             }
         });
     }
