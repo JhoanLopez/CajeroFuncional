@@ -20,12 +20,12 @@ public class LogBasesDeDatos {
             String user = properties.get("user").toString();
             String pass = properties.get("pass").toString();
             try (var con = DriverManager.getConnection(url, user, pass)){
-                conexion = (Connection) DriverManager.getConnection (url,user,pass);
+                conexion = DriverManager.getConnection (url,user,pass);
                 String guion = "--------------------";
                 System.out.println(guion + " CONECTADO CON LA BASE DE DATOS " + guion);
             } catch (SQLException ex) {
                 System.out.println("NO PUDIMOS CONECTAR CON LA BASE DE DATOS:");
-                System.err.println(ex.toString()); 
+                System.err.println(ex); 
             }
         } catch (FileNotFoundException ex) {
             System.out.print("ERROR: ");
