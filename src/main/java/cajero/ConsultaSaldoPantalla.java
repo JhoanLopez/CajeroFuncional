@@ -11,11 +11,12 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
     
     public ConsultaSaldoPantalla() {
         initComponents();
-        jl_fecha.setText(fechaHora.fechaActual());
+        jl_fechaActual.setText(fechaHora.fechaActual());
+        
     }
     
     
-    FechaHora fechaHora = new FechaHora();
+    FechaHoraMetodos fechaHora = new FechaHoraMetodos();
     
     
     @SuppressWarnings("unchecked")
@@ -24,9 +25,10 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         but_volver = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jl_fecha = new javax.swing.JLabel();
-        jl_fecha1 = new javax.swing.JLabel();
+        jl_tarjeta = new javax.swing.JLabel();
+        jl_numTarjeta = new javax.swing.JLabel();
+        jl_fechaActual = new javax.swing.JLabel();
+        jl_saldoActual = new javax.swing.JLabel();
         jl_fecha2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jl_consultaSaldo = new javax.swing.JLabel();
@@ -53,23 +55,29 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tarjeta: XXXX-XXXX-XXXX-XXXX");
-        jLabel1.setPreferredSize(new java.awt.Dimension(300, 25));
+        jl_tarjeta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jl_tarjeta.setForeground(new java.awt.Color(102, 102, 102));
+        jl_tarjeta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_tarjeta.setText("Tarjeta:");
+        jl_tarjeta.setPreferredSize(new java.awt.Dimension(300, 25));
 
-        jl_fecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jl_fecha.setForeground(new java.awt.Color(204, 204, 204));
-        jl_fecha.setText("DD/MM/YYYY");
+        jl_numTarjeta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jl_numTarjeta.setForeground(new java.awt.Color(102, 102, 102));
+        jl_numTarjeta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_numTarjeta.setPreferredSize(new java.awt.Dimension(300, 25));
 
-        jl_fecha1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jl_fecha1.setForeground(new java.awt.Color(204, 204, 204));
-        jl_fecha1.setText("00:00:00");
+        jl_fechaActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_fechaActual.setForeground(new java.awt.Color(204, 204, 204));
+        jl_fechaActual.setText("DD/MM/YYYY");
 
-        jl_fecha2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jl_fecha2.setForeground(new java.awt.Color(204, 204, 204));
-        jl_fecha2.setText("DD/MM/YYYY");
+        jl_saldoActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_saldoActual.setForeground(new java.awt.Color(204, 204, 204));
+        jl_saldoActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jl_fecha2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jl_fecha2.setForeground(new java.awt.Color(153, 153, 153));
+        jl_fecha2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_fecha2.setText("El saldo actual de su cuenta es:");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,7 +88,6 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
         jl_consultaSaldo.setText("Consulta De Saldo");
         jl_consultaSaldo.setPreferredSize(new java.awt.Dimension(310, 48));
         jPanel3.add(jl_consultaSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
-        jl_consultaSaldo.getAccessibleContext().setAccessibleName("Consulta De Saldo");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -136,29 +143,30 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(but_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(350, 350, 350))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jl_fecha)
+                        .addComponent(jl_fechaActual)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(350, 350, 350)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jl_saldoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(but_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(350, 350, 350)))
                 .addGap(10, 10, 10))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(350, 350, 350)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(350, 350, 350))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jl_fecha2)
-                        .addGap(50, 50, 50)
-                        .addComponent(jl_fecha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(340, 340, 340)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(350, 350, 350)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jl_tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jl_numTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+                            .addComponent(jl_fecha2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(340, 340, 340)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(340, 340, 340))
         );
         jPanel1Layout.setVerticalGroup(
@@ -167,16 +175,18 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_fecha))
+                    .addComponent(jl_fechaActual))
                 .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jl_fecha1)
-                    .addComponent(jl_fecha2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                    .addComponent(jl_tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jl_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jl_fecha2)
+                .addGap(55, 55, 55)
+                .addComponent(jl_saldoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addComponent(but_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
@@ -240,16 +250,17 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton but_volver;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel jl_cerrar;
     private javax.swing.JLabel jl_consultaSaldo;
-    private javax.swing.JLabel jl_fecha;
-    private javax.swing.JLabel jl_fecha1;
     private javax.swing.JLabel jl_fecha2;
+    private javax.swing.JLabel jl_fechaActual;
     private javax.swing.JLabel jl_minimizar;
+    public javax.swing.JLabel jl_numTarjeta;
+    private javax.swing.JLabel jl_saldoActual;
+    private javax.swing.JLabel jl_tarjeta;
     // End of variables declaration//GEN-END:variables
 
     

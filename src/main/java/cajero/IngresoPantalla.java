@@ -11,11 +11,11 @@ public class IngresoPantalla extends javax.swing.JFrame {
     
     public IngresoPantalla() {
         initComponents();
-        jl_fecha.setText(fechaHora.fechaActual());
+        jl_fechaActual.setText(fechaHora.fechaActual());
     }
     
     
-    FechaHora fechaHora = new FechaHora();
+    FechaHoraMetodos fechaHora = new FechaHoraMetodos();
     
     
     @SuppressWarnings("unchecked")
@@ -25,8 +25,9 @@ public class IngresoPantalla extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         but_volver = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jl_fecha = new javax.swing.JLabel();
+        jl_tarjeta = new javax.swing.JLabel();
+        jl_numTarjeta = new javax.swing.JLabel();
+        jl_fechaActual = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jl_minimizar = new javax.swing.JLabel();
         jl_cerrar = new javax.swing.JLabel();
@@ -56,15 +57,20 @@ public class IngresoPantalla extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tarjeta: XXXX-XXXX-XXXX-XXXX");
-        jLabel1.setPreferredSize(new java.awt.Dimension(300, 25));
+        jl_tarjeta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jl_tarjeta.setForeground(new java.awt.Color(102, 102, 102));
+        jl_tarjeta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_tarjeta.setText("Tarjeta:");
+        jl_tarjeta.setPreferredSize(new java.awt.Dimension(300, 25));
 
-        jl_fecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jl_fecha.setForeground(new java.awt.Color(204, 204, 204));
-        jl_fecha.setText("DD/MM/YYYY");
+        jl_numTarjeta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jl_numTarjeta.setForeground(new java.awt.Color(102, 102, 102));
+        jl_numTarjeta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_numTarjeta.setPreferredSize(new java.awt.Dimension(300, 25));
+
+        jl_fechaActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_fechaActual.setForeground(new java.awt.Color(204, 204, 204));
+        jl_fechaActual.setText("DD/MM/YYYY");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -139,7 +145,7 @@ public class IngresoPantalla extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jl_fecha)
+                        .addComponent(jl_fechaActual)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
@@ -147,16 +153,18 @@ public class IngresoPantalla extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(350, 350, 350)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(160, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(95, 95, 95)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(145, 145, 145))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(368, 368, 368)
+                .addComponent(jl_tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jl_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,11 +172,13 @@ public class IngresoPantalla extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_fecha))
+                    .addComponent(jl_fechaActual))
                 .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jl_tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jl_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,15 +248,16 @@ public class IngresoPantalla extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton but_volver;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jl_bienvenido;
     private javax.swing.JLabel jl_cerrar;
-    private javax.swing.JLabel jl_fecha;
+    private javax.swing.JLabel jl_fechaActual;
     private javax.swing.JLabel jl_minimizar;
+    public javax.swing.JLabel jl_numTarjeta;
+    private javax.swing.JLabel jl_tarjeta;
     // End of variables declaration//GEN-END:variables
 
     

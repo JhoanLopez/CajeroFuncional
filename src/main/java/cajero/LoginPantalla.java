@@ -22,9 +22,15 @@ public class LoginPantalla extends javax.swing.JFrame implements Runnable {
     }
 
     BienvenidoUsuarioPantalla usuarioPant = new BienvenidoUsuarioPantalla();
-    FechaHora fechaHora = new FechaHora();
-    Tarjeta tarjeta = new Tarjeta();
+    ConsultaSaldoPantalla saldoPantalla = new ConsultaSaldoPantalla();
+    ReintegroPantalla reintegroPantalla = new ReintegroPantalla();
+    IngresoPantalla ingresoPantalla = new IngresoPantalla();
+    ClienteCuentaMetodos clienteCuenta = new ClienteCuentaMetodos();
+    FechaHoraMetodos fechaHora = new FechaHoraMetodos();
+    ClienteMetodos tarjeta = new ClienteMetodos();
+    CuentaMetodos cuenta = new CuentaMetodos();
        
+    public String numeroTarjeta;
     public static int cont = 0;
     public static Thread hilo;
     
@@ -333,11 +339,22 @@ public class LoginPantalla extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jt_numCvsKeyTyped
 
     private void but_identificateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_identificateActionPerformed
+
         if (tarjeta.getIdentificarCliente(jt_numTarjeta.getText(), jt_numCvs.getText(),
         jp_numPin.getText(), "") == "Usuario encontrado"){
-
+            
+            //saldoPantalla.jl_numTarjeta.setText(jt_numTarjeta.getText());
+            //reintegroPantalla.jl_numTarjeta.setText(jt_numTarjeta.getText());
+            //ingresoPantalla.jl_numTarjeta.setText(jt_numTarjeta.getText());
+            //ingresoPantalla.jl_numTarjeta.setText(numeroTarjeta);
             usuarioPant.setVisible(true);
             usuarioPant.jl_nombre.setText(tarjeta.buscarNombre(jt_numTarjeta.getText()).toUpperCase());
+            //////
+            numeroTarjeta = jt_numTarjeta.getText();
+            ingresoPantalla.jl_numTarjeta.setText(numeroTarjeta);
+            ////////
+            usuarioPant.jl_fechaUltimaOperacion.setText(cuenta.getFechaUltimaOperacion
+            (clienteCuenta.getNumeroCuenta(tarjeta.getBuscarNif(jt_numTarjeta.getText()))));
             this.dispose();
         } else {
             jl_infoGeneral.setText("Datos incorrectos, vuelve a intentarlo");
@@ -416,6 +433,6 @@ public class LoginPantalla extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jl_numTarjeta;
     private javax.swing.JPasswordField jp_numPin;
     private javax.swing.JTextField jt_numCvs;
-    private javax.swing.JTextField jt_numTarjeta;
+    public javax.swing.JTextField jt_numTarjeta;
     // End of variables declaration//GEN-END:variables
 }

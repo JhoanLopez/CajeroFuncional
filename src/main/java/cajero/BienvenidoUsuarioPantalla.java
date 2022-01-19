@@ -11,13 +11,16 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
     
     public BienvenidoUsuarioPantalla() {
         initComponents();
-        jl_fecha.setText(fechaHora.fechaActual());
+        jl_fechaActual.setText(fechaHora.fechaActual());
     }
     
-    ConsultaSaldoPantalla saldoPant = new ConsultaSaldoPantalla();
+    //ConsultaSaldoPantalla saldoPant = new ConsultaSaldoPantalla();
     ReintegroPantalla reintegroPant = new ReintegroPantalla();
     IngresoPantalla ingresoPant = new IngresoPantalla();
-    FechaHora fechaHora = new FechaHora();
+    FechaHoraMetodos fechaHora = new FechaHoraMetodos();
+    ClienteMetodos clienteMetodos = new ClienteMetodos();
+    TarjetaMetodos tarjetaMetodos = new TarjetaMetodos();
+    
     
     
     @SuppressWarnings("unchecked")
@@ -35,14 +38,12 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
         jl_bienvenido = new javax.swing.JLabel();
         jl_nombre = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jl_fecha = new javax.swing.JLabel();
-        jl_fecha1 = new javax.swing.JLabel();
-        jl_fecha2 = new javax.swing.JLabel();
+        jl_fechaActual = new javax.swing.JLabel();
+        jl_fechaUltimaOperacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 500));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1000, 500));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -124,7 +125,6 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel3.setPreferredSize(null);
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jl_bienvenido.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -145,17 +145,14 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
         jLabel1.setText("Fecha Última Operación");
         jLabel1.setPreferredSize(new java.awt.Dimension(300, 25));
 
-        jl_fecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jl_fecha.setForeground(new java.awt.Color(204, 204, 204));
-        jl_fecha.setText("DD/MM/YYYY");
+        jl_fechaActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_fechaActual.setForeground(new java.awt.Color(204, 204, 204));
+        jl_fechaActual.setText("DD/MM/YYYY");
 
-        jl_fecha1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jl_fecha1.setForeground(new java.awt.Color(204, 204, 204));
-        jl_fecha1.setText("00:00:00");
-
-        jl_fecha2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jl_fecha2.setForeground(new java.awt.Color(204, 204, 204));
-        jl_fecha2.setText("DD/MM/YYYY");
+        jl_fechaUltimaOperacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_fechaUltimaOperacion.setForeground(new java.awt.Color(153, 153, 153));
+        jl_fechaUltimaOperacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_fechaUltimaOperacion.setText("00:00:00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -172,7 +169,7 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jl_fecha)
+                        .addComponent(jl_fechaActual)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
@@ -182,13 +179,10 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(350, 350, 350)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jl_fecha2)
-                        .addGap(50, 50, 50)
-                        .addComponent(jl_fecha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(350, 350, 350))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jl_fechaUltimaOperacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,15 +190,13 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_fecha))
+                    .addComponent(jl_fechaActual))
                 .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jl_fecha1)
-                    .addComponent(jl_fecha2))
+                .addComponent(jl_fechaUltimaOperacion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(but_consultaSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -234,7 +226,12 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_jl_minimizarMouseClicked
 
     private void but_consultaSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_consultaSaldoActionPerformed
-        saldoPant.setVisible(true);
+        LoginPantalla loginPantalla = new LoginPantalla();
+        /*saldoPant.jl_numTarjeta.setText(tarjetaMetodos.getNumeroTarjeta
+        (clienteMetodos.getBuscarNif(loginPantalla.jt_numTarjeta.getText())));*/
+        //saldoPant.jl_numTarjeta.setText(loginPantalla.jt_numTarjeta.getText());
+        //////////ASÍ TENGO QUE PASAR LA INFORMACIÓN;
+        loginPantalla.saldoPantalla.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_but_consultaSaldoActionPerformed
 
@@ -284,15 +281,14 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
     private javax.swing.JButton but_consultaSaldo;
     private javax.swing.JButton but_ingreso;
     private javax.swing.JButton but_reintegro;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel jl_bienvenido;
     private javax.swing.JLabel jl_cerrar;
-    private javax.swing.JLabel jl_fecha;
-    private javax.swing.JLabel jl_fecha1;
-    private javax.swing.JLabel jl_fecha2;
+    private javax.swing.JLabel jl_fechaActual;
+    public javax.swing.JLabel jl_fechaUltimaOperacion;
     private javax.swing.JLabel jl_minimizar;
     public javax.swing.JLabel jl_nombre;
     // End of variables declaration//GEN-END:variables
