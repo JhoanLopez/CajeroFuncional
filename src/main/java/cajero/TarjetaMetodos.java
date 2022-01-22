@@ -32,5 +32,4 @@ public class TarjetaMetodos {
         }
         return buscarNumeroTarjeta;
     }
-
 }
