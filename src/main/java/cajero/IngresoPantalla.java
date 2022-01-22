@@ -129,6 +129,7 @@ public class IngresoPantalla extends javax.swing.JFrame {
         jPanel3.add(jl_bienvenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, -1, -1));
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setText("Importe a Ingresar");
         jTextField1.setPreferredSize(new java.awt.Dimension(300, 60));
