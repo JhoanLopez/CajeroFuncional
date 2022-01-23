@@ -255,7 +255,7 @@ public class IngresoPantalla extends javax.swing.JFrame {
         if (cont == 0) {
             jt_importeIngresar.setText("");
             cont++;
-        }
+        } 
     }//GEN-LAST:event_jt_importeIngresarMouseClicked
 
     private void jt_importeIngresarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_importeIngresarKeyTyped
@@ -273,6 +273,8 @@ public class IngresoPantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_jt_importeIngresarKeyTyped
 
     private void but_realizarIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_realizarIngresoActionPerformed
+        TarjetaMetodos tarjeta = new TarjetaMetodos();
+        
         String importeString = null;
         Integer importeInt = null;
     
@@ -284,10 +286,12 @@ public class IngresoPantalla extends javax.swing.JFrame {
             } else if (!(importeInt % 10 == 0)) {
                 jl_infoIngreso.setText("Este campo solo admite números múltiplos de 10");
             } else {
-                JOptionPane.showMessageDialog(this, "Operación realizada correctamente");
-                jt_importeIngresar.setText("Importe a Ingresar");
-                cont = 0;
+                String numCuenta = String.valueOf(LoginPantalla.infoCliente.get(5).toString());
+                tarjeta.ingreso(importeInt, numCuenta, jl_infoIngreso);
+                
+                jt_importeIngresar.setText("Importe a Ingresar");  
             }
+            cont = 0;
         } catch (NumberFormatException ex){
             System.out.println("Formato de número incorrecto");
             System.out.println(ex);

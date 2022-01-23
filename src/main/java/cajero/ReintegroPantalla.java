@@ -1,5 +1,6 @@
 package cajero;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -256,10 +257,13 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         if (cont == 0) {
             jt_importeRetirar.setText("");
             cont++;
-        }
+        } 
+        
     }//GEN-LAST:event_jt_importeRetirarMouseClicked
 
     private void but_realizarReintegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_realizarReintegroActionPerformed
+        TarjetaMetodos tarjeta = new TarjetaMetodos();
+        
         String importeString = null;
         Integer importeInt = null;
         
@@ -271,10 +275,13 @@ public class ReintegroPantalla extends javax.swing.JFrame {
             } else if (!(importeInt % 10 == 0)) {
                 jl_infoReintegro.setText("Este campo solo admite números múltiplos de 10");
             } else {
-                JOptionPane.showMessageDialog(this, "Operación realizada correctamente");
+                String numCuenta = String.valueOf(LoginPantalla.infoCliente.get(5).toString());
+                
+                tarjeta.reintegro(importeInt, numCuenta, jl_infoReintegro);
+                
                 jt_importeRetirar.setText("Importe a Retirar");
-                cont = 0;
             }
+            cont = 0;
         } catch (NumberFormatException ex){
             System.out.println("Formato de número incorrecto");
             System.out.println(ex);
@@ -284,6 +291,7 @@ public class ReintegroPantalla extends javax.swing.JFrame {
     private void jt_importeRetirarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_importeRetirarKeyTyped
         int key = evt.getKeyChar();
         boolean numeros = key >= 48 && key <= 57 || key == 8 || key == 127;
+        setForeground(Color.BLACK);
         
         if (!numeros) {
             evt.consume();

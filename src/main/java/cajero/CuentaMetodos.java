@@ -30,5 +30,26 @@ public class CuentaMetodos {
         }
         return buscarUltimaModificacion;
     }
+    
+    public String getSaldo(String numeroCuenta) {
+        String buscarSaldo = null;
+        Connection conexion = null;
+        try {
+            conexion = LogBasesDeDatos.getConectar();
+            String sentenciaBuscar = "SELECT saldo FROM cuenta WHERE numero = '" + 
+            numeroCuenta + "'";
+            var sentencia = conexion.prepareStatement(sentenciaBuscar);
+            var resultado = sentencia.executeQuery();
+            if (resultado.next()) {
+                buscarSaldo = resultado.getString("saldo");
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar ULTIMA OPERACION");
+            System.out.println(ex);
+        }
+        return buscarSaldo;
+    }
 
 }

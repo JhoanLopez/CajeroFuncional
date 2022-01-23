@@ -344,6 +344,9 @@ public class LoginPantalla extends javax.swing.JFrame implements Runnable {
             infoCliente.put(2, tarjeta.buscarNombre(jt_numTarjeta.getText()).toUpperCase());
             infoCliente.put(3, cuenta.getFechaUltimaOperacion
             (clienteCuenta.getNumeroCuenta(tarjeta.getBuscarNif(jt_numTarjeta.getText()))));
+            infoCliente.put(4, cuenta.getSaldo
+            (clienteCuenta.getNumeroCuenta(tarjeta.getBuscarNif(jt_numTarjeta.getText()))));
+            infoCliente.put(5, clienteCuenta.getNumeroCuenta(tarjeta.getBuscarNif(jt_numTarjeta.getText())));
             
             BienvenidoUsuarioPantalla usuarioPant = new BienvenidoUsuarioPantalla();
             usuarioPant.setVisible(true);

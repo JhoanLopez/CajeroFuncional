@@ -123,13 +123,11 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
         jl_bienvenido.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jl_bienvenido.setForeground(new java.awt.Color(153, 153, 153));
         jl_bienvenido.setText("BIENVENIDO");
-        jl_bienvenido.setPreferredSize(null);
         jPanel3.add(jl_bienvenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, -1, -1));
 
         jl_nombre.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jl_nombre.setForeground(new java.awt.Color(153, 153, 153));
         jl_nombre.setText("JHOAN LÓPEZ GÓMEZ");
-        jl_nombre.setPreferredSize(null);
         jPanel3.add(jl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -142,7 +140,7 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
         jl_fechaActual.setForeground(new java.awt.Color(204, 204, 204));
         jl_fechaActual.setText("DD/MM/YYYY");
 
-        jl_fechaUltimaOperacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_fechaUltimaOperacion.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jl_fechaUltimaOperacion.setForeground(new java.awt.Color(153, 153, 153));
         jl_fechaUltimaOperacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jl_fechaUltimaOperacion.setText("00:00:00");
@@ -190,7 +188,7 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jl_fechaUltimaOperacion)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(but_consultaSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(but_reintegro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)

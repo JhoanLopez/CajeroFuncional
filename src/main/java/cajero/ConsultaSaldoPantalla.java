@@ -11,6 +11,7 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
     public ConsultaSaldoPantalla() {
         initComponents();
         FechaHoraMetodos fechaHora = new FechaHoraMetodos();
+        jl_saldoActual.setText((String) LoginPantalla.infoCliente.get(4));
         jl_numTarjeta.setText((String) LoginPantalla.infoCliente.get(1));
         jl_fechaActual.setText(fechaHora.fechaActual());
     }
@@ -22,7 +23,6 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         but_volver = new javax.swing.JButton();
         jl_fechaActual = new javax.swing.JLabel();
-        jl_saldoActual = new javax.swing.JLabel();
         jl_fecha2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jl_consultaSaldo = new javax.swing.JLabel();
@@ -32,6 +32,9 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jl_tarjeta = new javax.swing.JLabel();
         jl_numTarjeta = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jl_saldoActual = new javax.swing.JLabel();
+        jl_euro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 500));
@@ -55,10 +58,6 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
         jl_fechaActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jl_fechaActual.setForeground(new java.awt.Color(204, 204, 204));
         jl_fechaActual.setText("DD/MM/YYYY");
-
-        jl_saldoActual.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jl_saldoActual.setForeground(new java.awt.Color(204, 204, 204));
-        jl_saldoActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jl_fecha2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jl_fecha2.setForeground(new java.awt.Color(153, 153, 153));
@@ -150,8 +149,38 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jl_numTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(jl_numTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jl_tarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jl_saldoActual.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jl_saldoActual.setForeground(new java.awt.Color(102, 102, 102));
+        jl_saldoActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jl_euro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jl_euro.setForeground(new java.awt.Color(102, 102, 102));
+        jl_euro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_euro.setText("€");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jl_saldoActual)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jl_euro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jl_euro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jl_saldoActual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -173,11 +202,13 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(350, 350, 350)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jl_saldoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jl_fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(135, 135, 135))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,12 +220,12 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                 .addGap(37, 37, 37)
                 .addComponent(jl_fecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jl_saldoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(113, 113, 113)
                 .addComponent(but_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50))
         );
@@ -262,8 +293,10 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel jl_cerrar;
     private javax.swing.JLabel jl_consultaSaldo;
+    private javax.swing.JLabel jl_euro;
     private javax.swing.JLabel jl_fecha2;
     private javax.swing.JLabel jl_fechaActual;
     private javax.swing.JLabel jl_minimizar;
