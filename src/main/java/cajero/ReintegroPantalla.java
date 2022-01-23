@@ -16,7 +16,9 @@ public class ReintegroPantalla extends javax.swing.JFrame {
     
     
     FechaHoraMetodos fechaHora = new FechaHoraMetodos();
-    
+    String importeString = null;
+    Integer importeInt = null;
+    int cont = 0;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -25,15 +27,17 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         but_volver = new javax.swing.JButton();
+        jl_infoReintegro = new javax.swing.JLabel();
+        jl_fechaActual = new javax.swing.JLabel();
+        jt_importeRetirar = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jl_minimizar = new javax.swing.JLabel();
         jl_cerrar = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jl_bienvenido = new javax.swing.JLabel();
+        jl_ingreso = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jl_tarjeta = new javax.swing.JLabel();
         jl_numTarjeta = new javax.swing.JLabel();
-        jl_fechaActual = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 500));
@@ -46,14 +50,43 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1000, 500));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 500));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Realizar Reintegro");
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton2.setText("Realizar Retiro");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         but_volver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         but_volver.setText("Volver");
+        but_volver.setMinimumSize(new java.awt.Dimension(85, 30));
         but_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 but_volverActionPerformed(evt);
+            }
+        });
+
+        jl_infoReintegro.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jl_infoReintegro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jl_fechaActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jl_fechaActual.setForeground(new java.awt.Color(204, 204, 204));
+        jl_fechaActual.setText("DD/MM/YYYY");
+
+        jt_importeRetirar.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        jt_importeRetirar.setForeground(new java.awt.Color(153, 153, 153));
+        jt_importeRetirar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jt_importeRetirar.setText("Importe a Retirar");
+        jt_importeRetirar.setPreferredSize(new java.awt.Dimension(300, 60));
+        jt_importeRetirar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jt_importeRetirarMouseClicked(evt);
+            }
+        });
+        jt_importeRetirar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jt_importeRetirarKeyTyped(evt);
             }
         });
 
@@ -108,10 +141,15 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jl_bienvenido.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jl_bienvenido.setForeground(new java.awt.Color(153, 153, 153));
-        jl_bienvenido.setText("Reintegro");
-        jPanel3.add(jl_bienvenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, -1, -1));
+        jl_ingreso.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jl_ingreso.setForeground(new java.awt.Color(153, 153, 153));
+        jl_ingreso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_ingreso.setText("Reintegro");
+        jl_ingreso.setPreferredSize(new java.awt.Dimension(300, 50));
+        jPanel3.add(jl_ingreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, 300, -1));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setPreferredSize(new java.awt.Dimension(300, 40));
 
         jl_tarjeta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jl_tarjeta.setForeground(new java.awt.Color(102, 102, 102));
@@ -122,54 +160,56 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         jl_numTarjeta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jl_numTarjeta.setForeground(new java.awt.Color(102, 102, 102));
         jl_numTarjeta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_numTarjeta.setText("XXXX-XXXX-XXXX-XXXX");
         jl_numTarjeta.setPreferredSize(new java.awt.Dimension(300, 25));
 
-        jl_fechaActual.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jl_fechaActual.setForeground(new java.awt.Color(204, 204, 204));
-        jl_fechaActual.setText("DD/MM/YYYY");
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("Importe a Retirar");
-        jTextField1.setPreferredSize(new java.awt.Dimension(300, 60));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jl_tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jl_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jl_numTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+            .addComponent(jl_tarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jl_fechaActual)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(131, 131, 131)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jl_tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(350, 350, 350)
+                        .addComponent(but_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(350, 350, 350))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jl_fechaActual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(350, 350, 350)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jl_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(135, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(but_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(335, 335, 335))
+                        .addGap(150, 150, 150)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jl_infoReintegro, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jt_importeRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(100, 100, 100)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,17 +220,17 @@ public class ReintegroPantalla extends javax.swing.JFrame {
                     .addComponent(jl_fechaActual))
                 .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jl_tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jl_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(99, 99, 99)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                    .addComponent(jt_importeRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jl_infoReintegro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
                 .addComponent(but_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addGap(50, 50, 50))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -199,9 +239,11 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void but_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_volverActionPerformed
+        BienvenidoUsuarioPantalla usuarioPant = new BienvenidoUsuarioPantalla();
+        usuarioPant.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_but_volverActionPerformed
 
     private void jl_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_cerrarMouseClicked
         System.exit(0);
@@ -211,12 +253,40 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jl_minimizarMouseClicked
 
-    private void but_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_volverActionPerformed
-        BienvenidoUsuarioPantalla usuarioPant = new BienvenidoUsuarioPantalla();
-        usuarioPant.setVisible(true);
-        this.dispose();
+    private void jt_importeRetirarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_importeRetirarMouseClicked
+        if (cont == 0) {
+            jt_importeRetirar.setText("");
+            cont++;
+        }
+    }//GEN-LAST:event_jt_importeRetirarMouseClicked
 
-    }//GEN-LAST:event_but_volverActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        importeString = jt_importeRetirar.getText();
+        importeInt = Integer.parseInt(importeString);
+        
+        if (importeInt > 500) {
+            jl_infoReintegro.setText("Importe máximo de 500 euros para ingresar con tarjeta");
+        } else if (!(importeInt % 10 == 0)) {
+            jl_infoReintegro.setText("Este campo solo admite números múltiplos de 10");
+        } else {
+            jl_infoReintegro.setText("Cantidad Correcta");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jt_importeRetirarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_importeRetirarKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57 || key == 8 || key == 127;
+        
+        if (!numeros) {
+            evt.consume();
+            jl_infoReintegro.setText("Este campo solo admite números");
+        } else if (jt_importeRetirar.getText().length() > 2) {
+            evt.consume();
+            jl_infoReintegro.setText("Importe máximo de 500 euros para ingresar con tarjeta");
+        } else {
+            jl_infoReintegro.setText("");   
+        }
+    }//GEN-LAST:event_jt_importeRetirarKeyTyped
 
     
     /**
@@ -246,6 +316,12 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -261,13 +337,15 @@ public class ReintegroPantalla extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel jl_bienvenido;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel jl_cerrar;
     private javax.swing.JLabel jl_fechaActual;
+    private javax.swing.JLabel jl_infoReintegro;
+    private javax.swing.JLabel jl_ingreso;
     private javax.swing.JLabel jl_minimizar;
-    private javax.swing.JLabel jl_numTarjeta;
+    public javax.swing.JLabel jl_numTarjeta;
     private javax.swing.JLabel jl_tarjeta;
+    private javax.swing.JTextField jt_importeRetirar;
     // End of variables declaration//GEN-END:variables
 
     
