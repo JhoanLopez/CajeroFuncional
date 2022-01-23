@@ -8,7 +8,6 @@ package cajero;
 
 public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
 
-    
     public BienvenidoUsuarioPantalla() {
         initComponents();
         FechaHoraMetodos fechaHora = new FechaHoraMetodos();
@@ -16,7 +15,6 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
         jl_nombre.setText((String) LoginPantalla.infoCliente.get(2));
         jl_fechaActual.setText(fechaHora.fechaActual());
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

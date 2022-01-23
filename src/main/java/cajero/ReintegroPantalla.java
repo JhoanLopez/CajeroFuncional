@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 
 public class ReintegroPantalla extends javax.swing.JFrame {
 
-    
     public ReintegroPantalla() {
         initComponents();
         FechaHoraMetodos fechaHora = new FechaHoraMetodos();
@@ -25,7 +24,7 @@ public class ReintegroPantalla extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        but_realizarReintegro = new javax.swing.JButton();
         but_volver = new javax.swing.JButton();
         jl_infoReintegro = new javax.swing.JLabel();
         jl_fechaActual = new javax.swing.JLabel();
@@ -50,11 +49,11 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1000, 500));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 500));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton2.setText("Realizar Retiro");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        but_realizarReintegro.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        but_realizarReintegro.setText("Realizar Retiro");
+        but_realizarReintegro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                but_realizarReintegroActionPerformed(evt);
             }
         });
 
@@ -208,7 +207,7 @@ public class ReintegroPantalla extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jt_importeRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(100, 100, 100)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(but_realizarReintegro, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -224,7 +223,7 @@ public class ReintegroPantalla extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(but_realizarReintegro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jt_importeRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jl_infoReintegro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,23 +259,27 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jt_importeRetirarMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void but_realizarReintegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_realizarReintegroActionPerformed
         String importeString = null;
         Integer importeInt = null;
         
-        importeString = jt_importeRetirar.getText();
-        importeInt = Integer.parseInt(importeString);
-        
-        if (importeInt > 500) {
-            jl_infoReintegro.setText("Importe máximo de 500 euros para retirar con tarjeta");
-        } else if (!(importeInt % 10 == 0)) {
-            jl_infoReintegro.setText("Este campo solo admite números múltiplos de 10");
-        } else {
-            JOptionPane.showMessageDialog(this, "Operación realizada correctamente");
-            jt_importeRetirar.setText("Importe a Retirar");
-            cont = 0;
+        try {
+            importeString = jt_importeRetirar.getText();
+            importeInt = Integer.parseInt(importeString);
+            if (importeInt > 500) {
+                jl_infoReintegro.setText("Importe máximo de 500 euros para retirar con tarjeta");
+            } else if (!(importeInt % 10 == 0)) {
+                jl_infoReintegro.setText("Este campo solo admite números múltiplos de 10");
+            } else {
+                JOptionPane.showMessageDialog(this, "Operación realizada correctamente");
+                jt_importeRetirar.setText("Importe a Retirar");
+                cont = 0;
+            }
+        } catch (NumberFormatException ex){
+            System.out.println("Formato de número incorrecto");
+            System.out.println(ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_but_realizarReintegroActionPerformed
 
     private void jt_importeRetirarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jt_importeRetirarKeyTyped
         int key = evt.getKeyChar();
@@ -336,8 +339,8 @@ public class ReintegroPantalla extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton but_realizarReintegro;
     private javax.swing.JButton but_volver;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 
 public class IngresoPantalla extends javax.swing.JFrame {
 
-    
     public IngresoPantalla() {
         initComponents();
         FechaHoraMetodos fechaHora = new FechaHoraMetodos();
@@ -277,17 +276,21 @@ public class IngresoPantalla extends javax.swing.JFrame {
         String importeString = null;
         Integer importeInt = null;
     
-        importeString = jt_importeIngresar.getText();
-        importeInt = Integer.parseInt(importeString);
-        
-        if (importeInt > 500) {
-            jl_infoIngreso.setText("Importe máximo de 500 euros para ingresar con tarjeta");
-        } else if (!(importeInt % 10 == 0)) {
-            jl_infoIngreso.setText("Este campo solo admite números múltiplos de 10");
-        } else {
-            JOptionPane.showMessageDialog(this, "Operación realizada correctamente");
-            jt_importeIngresar.setText("Importe a Ingresar");
-            cont = 0;
+        try {
+            importeString = jt_importeIngresar.getText();
+            importeInt = Integer.parseInt(importeString);
+            if (importeInt > 500) {
+                jl_infoIngreso.setText("Importe máximo de 500 euros para ingresar con tarjeta");
+            } else if (!(importeInt % 10 == 0)) {
+                jl_infoIngreso.setText("Este campo solo admite números múltiplos de 10");
+            } else {
+                JOptionPane.showMessageDialog(this, "Operación realizada correctamente");
+                jt_importeIngresar.setText("Importe a Ingresar");
+                cont = 0;
+            }
+        } catch (NumberFormatException ex){
+            System.out.println("Formato de número incorrecto");
+            System.out.println(ex);
         }
     }//GEN-LAST:event_but_realizarIngresoActionPerformed
 

@@ -8,7 +8,6 @@ package cajero;
 
 public class ConsultaSaldoPantalla extends javax.swing.JFrame {
 
-    
     public ConsultaSaldoPantalla() {
         initComponents();
         FechaHoraMetodos fechaHora = new FechaHoraMetodos();
@@ -16,7 +15,6 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
         jl_fechaActual.setText(fechaHora.fechaActual());
     }
     
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

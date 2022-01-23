@@ -86,7 +86,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jt_importeRetirar" min="-2" pref="300" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="jButton2" min="-2" pref="300" max="-2" attributes="0"/>
+                                  <Component id="but_realizarReintegro" min="-2" pref="300" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -109,7 +109,7 @@
                   <Component id="jPanel4" pref="32" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton2" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="but_realizarReintegro" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                       <Component id="jt_importeRetirar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -122,7 +122,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="but_realizarReintegro">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
@@ -130,7 +130,7 @@
             <Property name="text" type="java.lang.String" value="Realizar Retiro"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="but_realizarReintegroActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="but_volver">
