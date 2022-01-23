@@ -1,5 +1,7 @@
 package cajero;
 
+import javax.swing.JOptionPane;
+
 /**
  * @date 15 dic. 2021
  * @author Jhoan López
@@ -11,14 +13,12 @@ public class ReintegroPantalla extends javax.swing.JFrame {
     
     public ReintegroPantalla() {
         initComponents();
+        FechaHoraMetodos fechaHora = new FechaHoraMetodos();
+        jl_numTarjeta.setText((String) LoginPantalla.infoCliente.get(1));
         jl_fechaActual.setText(fechaHora.fechaActual());
     }
-    
-    
-    FechaHoraMetodos fechaHora = new FechaHoraMetodos();
-    String importeString = null;
-    Integer importeInt = null;
-    int cont = 0;
+      
+    public static int cont = 0;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -261,15 +261,20 @@ public class ReintegroPantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_jt_importeRetirarMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String importeString = null;
+        Integer importeInt = null;
+        
         importeString = jt_importeRetirar.getText();
         importeInt = Integer.parseInt(importeString);
         
         if (importeInt > 500) {
-            jl_infoReintegro.setText("Importe máximo de 500 euros para ingresar con tarjeta");
+            jl_infoReintegro.setText("Importe máximo de 500 euros para retirar con tarjeta");
         } else if (!(importeInt % 10 == 0)) {
             jl_infoReintegro.setText("Este campo solo admite números múltiplos de 10");
         } else {
-            jl_infoReintegro.setText("Cantidad Correcta");
+            JOptionPane.showMessageDialog(this, "Operación realizada correctamente");
+            jt_importeRetirar.setText("Importe a Retirar");
+            cont = 0;
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -282,7 +287,6 @@ public class ReintegroPantalla extends javax.swing.JFrame {
             jl_infoReintegro.setText("Este campo solo admite números");
         } else if (jt_importeRetirar.getText().length() > 2) {
             evt.consume();
-            jl_infoReintegro.setText("Importe máximo de 500 euros para ingresar con tarjeta");
         } else {
             jl_infoReintegro.setText("");   
         }

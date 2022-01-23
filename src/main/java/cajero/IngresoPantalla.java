@@ -1,5 +1,7 @@
 package cajero;
 
+import javax.swing.JOptionPane;
+
 /**
  * @date 15 dic. 2021
  * @author Jhoan López
@@ -11,14 +13,12 @@ public class IngresoPantalla extends javax.swing.JFrame {
     
     public IngresoPantalla() {
         initComponents();
+        FechaHoraMetodos fechaHora = new FechaHoraMetodos();
+        jl_numTarjeta.setText((String) LoginPantalla.infoCliente.get(1));
         jl_fechaActual.setText(fechaHora.fechaActual());
     }
     
-    
-    FechaHoraMetodos fechaHora = new FechaHoraMetodos();
-    String importeString = null;
-    Integer importeInt = null;
-    int cont = 0;
+    public static int cont = 0;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -268,13 +268,15 @@ public class IngresoPantalla extends javax.swing.JFrame {
             jl_infoIngreso.setText("Este campo solo admite números");
         } else if (jt_importeIngresar.getText().length() > 2) {
             evt.consume();
-            jl_infoIngreso.setText("Importe máximo de 500 euros para ingresar con tarjeta");
         } else {
             jl_infoIngreso.setText("");   
         }
     }//GEN-LAST:event_jt_importeIngresarKeyTyped
 
     private void but_realizarIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_realizarIngresoActionPerformed
+        String importeString = null;
+        Integer importeInt = null;
+    
         importeString = jt_importeIngresar.getText();
         importeInt = Integer.parseInt(importeString);
         
@@ -283,7 +285,9 @@ public class IngresoPantalla extends javax.swing.JFrame {
         } else if (!(importeInt % 10 == 0)) {
             jl_infoIngreso.setText("Este campo solo admite números múltiplos de 10");
         } else {
-            jl_infoIngreso.setText("Cantidad Correcta");
+            JOptionPane.showMessageDialog(this, "Operación realizada correctamente");
+            jt_importeIngresar.setText("Importe a Ingresar");
+            cont = 0;
         }
     }//GEN-LAST:event_but_realizarIngresoActionPerformed
 

@@ -11,14 +11,12 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
     
     public ConsultaSaldoPantalla() {
         initComponents();
+        FechaHoraMetodos fechaHora = new FechaHoraMetodos();
+        jl_numTarjeta.setText((String) LoginPantalla.infoCliente.get(1));
         jl_fechaActual.setText(fechaHora.fechaActual());
-        
     }
     
-    
-    FechaHoraMetodos fechaHora = new FechaHoraMetodos();
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -34,8 +32,8 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
         jl_minimizar = new javax.swing.JLabel();
         jl_cerrar = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jl_tarjeta1 = new javax.swing.JLabel();
-        jl_numTarjeta1 = new javax.swing.JLabel();
+        jl_tarjeta = new javax.swing.JLabel();
+        jl_numTarjeta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 500));
@@ -131,31 +129,31 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(300, 40));
 
-        jl_tarjeta1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jl_tarjeta1.setForeground(new java.awt.Color(102, 102, 102));
-        jl_tarjeta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jl_tarjeta1.setText("Tarjeta:");
-        jl_tarjeta1.setPreferredSize(new java.awt.Dimension(300, 25));
+        jl_tarjeta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jl_tarjeta.setForeground(new java.awt.Color(102, 102, 102));
+        jl_tarjeta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_tarjeta.setText("Tarjeta:");
+        jl_tarjeta.setPreferredSize(new java.awt.Dimension(300, 25));
 
-        jl_numTarjeta1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jl_numTarjeta1.setForeground(new java.awt.Color(102, 102, 102));
-        jl_numTarjeta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jl_numTarjeta1.setText("XXXX-XXXX-XXXX-XXXX");
-        jl_numTarjeta1.setPreferredSize(new java.awt.Dimension(300, 25));
+        jl_numTarjeta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jl_numTarjeta.setForeground(new java.awt.Color(102, 102, 102));
+        jl_numTarjeta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jl_numTarjeta.setText("XXXX-XXXX-XXXX-XXXX");
+        jl_numTarjeta.setPreferredSize(new java.awt.Dimension(300, 25));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jl_tarjeta1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jl_tarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jl_numTarjeta1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jl_numTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jl_numTarjeta1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-            .addComponent(jl_tarjeta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jl_numTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+            .addComponent(jl_tarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -271,9 +269,9 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
     private javax.swing.JLabel jl_fecha2;
     private javax.swing.JLabel jl_fechaActual;
     private javax.swing.JLabel jl_minimizar;
-    public javax.swing.JLabel jl_numTarjeta1;
+    public javax.swing.JLabel jl_numTarjeta;
     private javax.swing.JLabel jl_saldoActual;
-    private javax.swing.JLabel jl_tarjeta1;
+    private javax.swing.JLabel jl_tarjeta;
     // End of variables declaration//GEN-END:variables
 
     

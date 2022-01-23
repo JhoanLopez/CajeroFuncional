@@ -2,6 +2,7 @@ package cajero;
 
 import java.awt.Image;
 import javax.swing.*;
+import java.util.*;
 
 /**
  * @date 15 dic. 2021
@@ -20,17 +21,11 @@ public class LoginPantalla extends javax.swing.JFrame implements Runnable {
         hilo = new Thread(this);
         hilo.start(); 
     }
-
-    BienvenidoUsuarioPantalla usuarioPant = new BienvenidoUsuarioPantalla();
-    ConsultaSaldoPantalla saldoPantalla = new ConsultaSaldoPantalla();
-    ReintegroPantalla reintegroPantalla = new ReintegroPantalla();
-    IngresoPantalla ingresoPantalla = new IngresoPantalla();
-    ClienteCuentaMetodos clienteCuenta = new ClienteCuentaMetodos();
+    
     FechaHoraMetodos fechaHora = new FechaHoraMetodos();
     ClienteMetodos tarjeta = new ClienteMetodos();
-    CuentaMetodos cuenta = new CuentaMetodos();
-       
-    public String numeroTarjeta;
+    
+    public static Map infoCliente = new HashMap();
     public static int cont = 0;
     public static Thread hilo;
     
@@ -342,20 +337,17 @@ public class LoginPantalla extends javax.swing.JFrame implements Runnable {
 
         if (tarjeta.getIdentificarCliente(jt_numTarjeta.getText(), jt_numCvs.getText(),
         jp_numPin.getText(), "") == "Usuario encontrado"){
+            ClienteCuentaMetodos clienteCuenta = new ClienteCuentaMetodos();
+            CuentaMetodos cuenta = new CuentaMetodos();
             
-            //saldoPantalla.jl_numTarjeta.setText(jt_numTarjeta.getText());
-            //reintegroPantalla.jl_numTarjeta.setText(jt_numTarjeta.getText());
-            //ingresoPantalla.jl_numTarjeta.setText(jt_numTarjeta.getText());
-            //ingresoPantalla.jl_numTarjeta.setText(numeroTarjeta);
-            usuarioPant.setVisible(true);
-            usuarioPant.jl_nombre.setText(tarjeta.buscarNombre(jt_numTarjeta.getText()).toUpperCase());
-            //////
-            numeroTarjeta = jt_numTarjeta.getText();
-            ingresoPantalla.jl_numTarjeta.setText(numeroTarjeta);
-            ////////
-            usuarioPant.jl_fechaUltimaOperacion.setText(cuenta.getFechaUltimaOperacion
+            infoCliente.put(1, jt_numTarjeta.getText());
+            infoCliente.put(2, tarjeta.buscarNombre(jt_numTarjeta.getText()).toUpperCase());
+            infoCliente.put(3, cuenta.getFechaUltimaOperacion
             (clienteCuenta.getNumeroCuenta(tarjeta.getBuscarNif(jt_numTarjeta.getText()))));
-            this.dispose();
+            
+            BienvenidoUsuarioPantalla usuarioPant = new BienvenidoUsuarioPantalla();
+            usuarioPant.setVisible(true);
+            this.setVisible(false);
         } else {
             jl_infoGeneral.setText("Datos incorrectos, vuelve a intentarlo");
         }

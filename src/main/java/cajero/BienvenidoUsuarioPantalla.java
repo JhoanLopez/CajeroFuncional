@@ -11,16 +11,11 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
     
     public BienvenidoUsuarioPantalla() {
         initComponents();
+        FechaHoraMetodos fechaHora = new FechaHoraMetodos();
+        jl_fechaUltimaOperacion.setText((String) LoginPantalla.infoCliente.get(3));
+        jl_nombre.setText((String) LoginPantalla.infoCliente.get(2));
         jl_fechaActual.setText(fechaHora.fechaActual());
     }
-    
-    //ConsultaSaldoPantalla saldoPant = new ConsultaSaldoPantalla();
-    ReintegroPantalla reintegroPant = new ReintegroPantalla();
-    IngresoPantalla ingresoPant = new IngresoPantalla();
-    FechaHoraMetodos fechaHora = new FechaHoraMetodos();
-    ClienteMetodos clienteMetodos = new ClienteMetodos();
-    TarjetaMetodos tarjetaMetodos = new TarjetaMetodos();
-    
     
     
     @SuppressWarnings("unchecked")
@@ -213,6 +208,7 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void but_ingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_ingresoActionPerformed
+        IngresoPantalla ingresoPant = new IngresoPantalla();
         ingresoPant.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_but_ingresoActionPerformed
@@ -226,16 +222,13 @@ public class BienvenidoUsuarioPantalla extends javax.swing.JFrame {
     }//GEN-LAST:event_jl_minimizarMouseClicked
 
     private void but_consultaSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_consultaSaldoActionPerformed
-        LoginPantalla loginPantalla = new LoginPantalla();
-        /*saldoPant.jl_numTarjeta.setText(tarjetaMetodos.getNumeroTarjeta
-        (clienteMetodos.getBuscarNif(loginPantalla.jt_numTarjeta.getText())));*/
-        //saldoPant.jl_numTarjeta.setText(loginPantalla.jt_numTarjeta.getText());
-        //////////ASÍ TENGO QUE PASAR LA INFORMACIÓN;
-        loginPantalla.saldoPantalla.setVisible(true);
+        ConsultaSaldoPantalla saldoPant = new ConsultaSaldoPantalla();
+        saldoPant.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_but_consultaSaldoActionPerformed
 
     private void but_reintegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_reintegroActionPerformed
+        ReintegroPantalla reintegroPant = new ReintegroPantalla();
         reintegroPant.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_but_reintegroActionPerformed
