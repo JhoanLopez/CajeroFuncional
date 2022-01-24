@@ -277,7 +277,6 @@ public class IngresoPantalla extends javax.swing.JFrame {
         
         String importeString = null;
         Integer importeInt = null;
-    
         try {
             importeString = jt_importeIngresar.getText();
             importeInt = Integer.parseInt(importeString);

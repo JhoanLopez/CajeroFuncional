@@ -266,7 +266,6 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         
         String importeString = null;
         Integer importeInt = null;
-        
         try {
             importeString = jt_importeRetirar.getText();
             importeInt = Integer.parseInt(importeString);
@@ -276,7 +275,6 @@ public class ReintegroPantalla extends javax.swing.JFrame {
                 jl_infoReintegro.setText("Este campo solo admite números múltiplos de 10");
             } else {
                 String numCuenta = String.valueOf(LoginPantalla.infoCliente.get(5).toString());
-                
                 tarjeta.reintegro(importeInt, numCuenta, jl_infoReintegro);
                 
                 jt_importeRetirar.setText("Importe a Retirar");

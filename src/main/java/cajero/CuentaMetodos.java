@@ -1,5 +1,6 @@
 package cajero;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -42,7 +43,6 @@ public class CuentaMetodos {
             var resultado = sentencia.executeQuery();
             if (resultado.next()) {
                 buscarSaldo = resultado.getString("saldo");
-
             }
             conexion.close();
         } catch (SQLException ex) {
@@ -50,6 +50,42 @@ public class CuentaMetodos {
             System.out.println(ex);
         }
         return buscarSaldo;
+    }
+    
+    public void actualizarSaldoIngreso (String numeroCuenta, Integer importe) {
+    
+        Connection conexion = null;
+        try {
+            conexion = LogBasesDeDatos.getConectar();
+            int saldoActualizado = Integer.valueOf(this.getSaldo(numeroCuenta))  + importe;
+            System.out.println("A ver si actualiza el saldo " + saldoActualizado);
+            String sentenciaBuscar = "UPDATE cuenta SET saldo = '" +
+            saldoActualizado + "', fecha_ultima_modificacion = now() WHERE numero = '" + numeroCuenta + "'" ;
+            var sentencia = conexion.prepareStatement(sentenciaBuscar);
+            var resultado = sentencia.executeUpdate();
+            conexion.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar ULTIMA OPERACION");
+            System.out.println(ex);
+        }
+    }
+    
+    public void actualizarSaldoRetiro (String numeroCuenta, Integer importe) {
+    
+        Connection conexion = null;
+        try {
+            conexion = LogBasesDeDatos.getConectar();
+            int saldoActualizado = Integer.valueOf(this.getSaldo(numeroCuenta))  - importe;
+            System.out.println("A ver si actualiza el saldo " + saldoActualizado);
+            String sentenciaBuscar = "UPDATE cuenta SET saldo = '" +
+            saldoActualizado + "', fecha_ultima_modificacion = now() WHERE numero = '" + numeroCuenta + "'" ;
+            var sentencia = conexion.prepareStatement(sentenciaBuscar);
+            var resultado = sentencia.executeUpdate();
+            conexion.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar ULTIMA OPERACION");
+            System.out.println(ex);
+        }
     }
 
 }
