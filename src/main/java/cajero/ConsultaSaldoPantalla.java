@@ -11,7 +11,8 @@ public class ConsultaSaldoPantalla extends javax.swing.JFrame {
     public ConsultaSaldoPantalla() {
         initComponents();
         FechaHoraMetodos fechaHora = new FechaHoraMetodos();
-        jl_saldoActual.setText((String) LoginPantalla.infoCliente.get(4));
+        CuentaMetodos cuenta = new CuentaMetodos();
+        jl_saldoActual.setText(cuenta.getSaldo((String) LoginPantalla.infoCliente.get(5)));
         jl_numTarjeta.setText((String) LoginPantalla.infoCliente.get(1));
         jl_fechaActual.setText(fechaHora.fechaActual());
     }

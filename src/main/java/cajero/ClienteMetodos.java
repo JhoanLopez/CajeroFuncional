@@ -1,11 +1,11 @@
 package cajero;
 
-import java.awt.*;
+
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 /**
  * @date 13 ene. 2022
@@ -68,11 +68,15 @@ public class ClienteMetodos {
             var resultado = sentencia.executeQuery();
             
             if (resultado.next()) {
-                busquedaUsuario = "Usuario encontrado";
-                System.out.println(busquedaUsuario);
+                if (resultado.getString("bloqueada").equals("1")) {
+                    busquedaUsuario = "Usuario encontrado";
+                } else {
+                    LoginPantalla login = new LoginPantalla();
+                    busquedaUsuario = "Tarjeta Bloqueada";
+                    JOptionPane.showMessageDialog(login, "Tarjeta Bloqueda");
+                }
             } else {
                 busquedaUsuario = "Usuario no encontrado";
-                System.out.println(busquedaUsuario);
             }
             conexion.close();
         } catch (Exception ex) {

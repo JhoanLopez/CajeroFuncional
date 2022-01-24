@@ -1,5 +1,6 @@
 package cajero;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,6 +16,7 @@ public class IngresoPantalla extends javax.swing.JFrame {
         FechaHoraMetodos fechaHora = new FechaHoraMetodos();
         jl_numTarjeta.setText((String) LoginPantalla.infoCliente.get(1));
         jl_fechaActual.setText(fechaHora.fechaActual());
+        jl_infoIngreso.setForeground(Color.black);
     }
     
     public static int cont = 0;
@@ -287,7 +289,6 @@ public class IngresoPantalla extends javax.swing.JFrame {
             } else {
                 String numCuenta = String.valueOf(LoginPantalla.infoCliente.get(5).toString());
                 tarjeta.ingreso(importeInt, numCuenta, jl_infoIngreso);
-                
                 jt_importeIngresar.setText("Importe a Ingresar");  
             }
             cont = 0;

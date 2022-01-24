@@ -1,6 +1,5 @@
 package cajero;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -58,7 +57,6 @@ public class CuentaMetodos {
         try {
             conexion = LogBasesDeDatos.getConectar();
             int saldoActualizado = Integer.valueOf(this.getSaldo(numeroCuenta))  + importe;
-            System.out.println("A ver si actualiza el saldo " + saldoActualizado);
             String sentenciaBuscar = "UPDATE cuenta SET saldo = '" +
             saldoActualizado + "', fecha_ultima_modificacion = now() WHERE numero = '" + numeroCuenta + "'" ;
             var sentencia = conexion.prepareStatement(sentenciaBuscar);
@@ -76,7 +74,6 @@ public class CuentaMetodos {
         try {
             conexion = LogBasesDeDatos.getConectar();
             int saldoActualizado = Integer.valueOf(this.getSaldo(numeroCuenta))  - importe;
-            System.out.println("A ver si actualiza el saldo " + saldoActualizado);
             String sentenciaBuscar = "UPDATE cuenta SET saldo = '" +
             saldoActualizado + "', fecha_ultima_modificacion = now() WHERE numero = '" + numeroCuenta + "'" ;
             var sentencia = conexion.prepareStatement(sentenciaBuscar);

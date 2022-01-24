@@ -334,9 +334,9 @@ public class LoginPantalla extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jt_numCvsKeyTyped
 
     private void but_identificateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_identificateActionPerformed
-
-        if (tarjeta.getIdentificarCliente(jt_numTarjeta.getText(), jt_numCvs.getText(),
-        jp_numPin.getText(), "") == "Usuario encontrado"){
+        String infoTarjeta = tarjeta.getIdentificarCliente(jt_numTarjeta.getText(), jt_numCvs.getText(),
+        jp_numPin.getText(), "");
+        if (infoTarjeta == "Usuario encontrado"){
             ClienteCuentaMetodos clienteCuenta = new ClienteCuentaMetodos();
             CuentaMetodos cuenta = new CuentaMetodos();
             
@@ -351,6 +351,8 @@ public class LoginPantalla extends javax.swing.JFrame implements Runnable {
             BienvenidoUsuarioPantalla usuarioPant = new BienvenidoUsuarioPantalla();
             usuarioPant.setVisible(true);
             this.setVisible(false);
+        } else if (infoTarjeta == "Tarjeta Bloqueada"){
+            jl_infoGeneral.setText("Tarjeta Bloqueada");
         } else {
             jl_infoGeneral.setText("Datos incorrectos, vuelve a intentarlo");
         }

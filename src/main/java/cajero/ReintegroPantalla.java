@@ -16,6 +16,7 @@ public class ReintegroPantalla extends javax.swing.JFrame {
         FechaHoraMetodos fechaHora = new FechaHoraMetodos();
         jl_numTarjeta.setText((String) LoginPantalla.infoCliente.get(1));
         jl_fechaActual.setText(fechaHora.fechaActual());
+        jl_infoReintegro.setForeground(Color.black);
     }
       
     public static int cont = 0;

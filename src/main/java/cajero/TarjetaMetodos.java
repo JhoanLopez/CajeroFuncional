@@ -24,7 +24,6 @@ public class TarjetaMetodos {
             var resultado = sentencia.executeQuery();
             if (resultado.next()) {
                 buscarNumeroTarjeta = resultado.getString("numero");
-                System.out.println("Encontrado");
             }
             conexion.close();
         } catch (SQLException ex) {
@@ -49,10 +48,8 @@ public class TarjetaMetodos {
                 int saldo = Integer.valueOf(resultado.getString("saldo"));
             
                 if ( reintegro > saldo) {
-                    label.setForeground(Color.red);
                     label.setText("Saldo insuficiente");
                 } else {
-                    label.setForeground(Color.green);
                     cuenta.actualizarSaldoRetiro(numeroCuenta, reintegro);
                     label.setText("Operación realizada correctamente");
                 }   
@@ -80,11 +77,8 @@ public class TarjetaMetodos {
                 int saldo = Integer.valueOf(resultado.getString("saldo"));
             
                 if ( ingreso > 500) {
-                    label.setForeground(Color.red);
                     label.setText("Has superado el límite de ingresos para esta cuenta");
                 } else {
-                    label.setForeground(Color.green);
-                    System.out.println("numero Cuenta " + numeroCuenta);
                     cuenta.actualizarSaldoIngreso(numeroCuenta, ingreso);
                     label.setText("Operación realizada correctamente");
                 }
