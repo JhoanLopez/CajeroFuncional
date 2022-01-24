@@ -2,11 +2,9 @@ package cajero;
 
 
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.SQLException;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import java.sql.*;
+import javax.swing.*;
+
 /**
  * @date 13 ene. 2022
  * @author Jhoan López
@@ -43,9 +41,6 @@ public class ClienteMetodos {
             cajaTexto.getText().length() == 4 ||
             cajaTexto.getText().length() == 11 ||
             cajaTexto.getText().length() == 18) {
-            
-            //String numActual = cajaTexto.getText() + " - ";
-            //cajaTexto.setText(numActual);
         } else {
             info.setText("");
         }
@@ -56,7 +51,6 @@ public class ClienteMetodos {
         
         String busquedaUsuario = null;
         Connection conexion = null;
-        
         try {
             conexion = LogBasesDeDatos.getConectar();
             BienvenidoUsuarioPantalla segPantalla = new BienvenidoUsuarioPantalla();
@@ -89,7 +83,6 @@ public class ClienteMetodos {
     
         String busquedaNombre = null;
         Connection conexion = null;
-        
         try {
             conexion = LogBasesDeDatos.getConectar();
             String sentenciaBuscar = ("SELECT nombre, apellidos FROM cliente WHERE numero_tarjeta = '" + numTarjeta + "'");
@@ -108,6 +101,7 @@ public class ClienteMetodos {
     }
     
     public String getBuscarNif(String numTarjeta) {
+        
         String busquedaNif = null;
         Connection conexion =null;
         try {

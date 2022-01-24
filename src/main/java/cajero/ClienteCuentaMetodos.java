@@ -1,7 +1,6 @@
 package cajero;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * @date 19 ene. 2022
@@ -30,5 +29,4 @@ public class ClienteCuentaMetodos {
         }
         return buscarNumeroCuenta;
     }
-
 }

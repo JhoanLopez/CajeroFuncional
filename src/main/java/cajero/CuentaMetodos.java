@@ -1,7 +1,6 @@
 package cajero;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * @date 19 ene. 2022
@@ -12,6 +11,7 @@ import java.sql.SQLException;
 public class CuentaMetodos {
     
     public String getFechaUltimaOperacion(String numeroCuenta) {
+        
         String buscarUltimaModificacion = null;
         Connection conexion = null;
         try {
@@ -32,6 +32,7 @@ public class CuentaMetodos {
     }
     
     public String getSaldo(String numeroCuenta) {
+        
         String buscarSaldo = null;
         Connection conexion = null;
         try {
@@ -84,5 +85,4 @@ public class CuentaMetodos {
             System.out.println(ex);
         }
     }
-
 }

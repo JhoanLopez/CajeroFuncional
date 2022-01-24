@@ -1,8 +1,6 @@
 package cajero;
 
-import java.awt.Color;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 import javax.swing.JLabel;
 
 /**
@@ -14,6 +12,7 @@ import javax.swing.JLabel;
 public class TarjetaMetodos {
     
     public String getNumeroTarjeta(String nifCliente) {
+        
         String buscarNumeroTarjeta = null;
         Connection conexion = null;
         try {
@@ -42,7 +41,6 @@ public class TarjetaMetodos {
             numeroCuenta + "'" ;
             var sentencia = conexion.prepareStatement(sentenciaBuscar);
             var resultado = sentencia.executeQuery();
-            
             if (resultado.next()) {
                 CuentaMetodos cuenta = new CuentaMetodos();
                 int saldo = Integer.valueOf(resultado.getString("saldo"));
@@ -58,8 +56,7 @@ public class TarjetaMetodos {
         } catch (SQLException ex) {
             System.out.println("Error al buscar NUMERO DE TARJETA");
             System.out.println(ex);
-        }  
-        
+        }    
     }
     
     public void ingreso(Integer ingreso, String numeroCuenta, JLabel label) {
@@ -71,7 +68,6 @@ public class TarjetaMetodos {
             numeroCuenta + "'" ;
             var sentencia = conexion.prepareStatement(sentenciaBuscar);
             var resultado = sentencia.executeQuery();
-   
             if (resultado.next()) {
                 CuentaMetodos cuenta = new CuentaMetodos();
                 int saldo = Integer.valueOf(resultado.getString("saldo"));
@@ -88,8 +84,5 @@ public class TarjetaMetodos {
             System.out.println("Error al buscar NUMERO DE TARJETA");
             System.out.println(ex);
         }  
-    }
-    
-    
-    
+    } 
 }

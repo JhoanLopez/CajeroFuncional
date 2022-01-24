@@ -11,7 +11,9 @@ import java.io.*;
  */
 
 public class LogBasesDeDatos {
+    
     public static Connection getConectar() {
+        
         Properties properties = new Properties();
         Connection conexion = null;
         try {

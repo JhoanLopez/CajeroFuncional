@@ -29,7 +29,6 @@ public class LoginPantalla extends javax.swing.JFrame implements Runnable {
     public static int cont = 0;
     public static Thread hilo;
     
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
